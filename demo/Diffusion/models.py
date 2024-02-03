@@ -150,6 +150,11 @@ def get_path(version, pipeline, controlnets=None):
             return "stabilityai/sdxl-turbo"
         else:
             raise ValueError(f"Unsupported SDXL Turbo pipeline {pipeline.name}")
+    elif version == 'pg':
+        if pipeline.is_sd_xl_base():
+            return "playgroundai/playground-v2-1024px-aesthetic"
+        else:
+            raise ValueError(f"Unsupported Playground pipeline {pipeline.name}")
     else:
         raise ValueError(f"Incorrect version {version}")
 
@@ -158,13 +163,13 @@ def get_clip_embedding_dim(version, pipeline):
         return 768
     elif version in ("2.0", "2.0-base", "2.1", "2.1-base"):
         return 1024
-    elif version in ("xl-1.0", "xl-turbo") and pipeline.is_sd_xl_base():
+    elif version in ("xl-1.0", "xl-turbo", "pg") and pipeline.is_sd_xl_base():
         return 768
     else:
         raise ValueError(f"Invalid version {version} + pipeline {pipeline}")
 
 def get_clipwithproj_embedding_dim(version, pipeline):
-    if version in ("xl-1.0", "xl-turbo"):
+    if version in ("xl-1.0", "xl-turbo", "pg"):
         return 1280
     else:
         raise ValueError(f"Invalid version {version} + pipeline {pipeline}")
@@ -174,9 +179,9 @@ def get_unet_embedding_dim(version, pipeline):
         return 768
     elif version in ("2.0", "2.0-base", "2.1", "2.1-base"):
         return 1024
-    elif version in ("xl-1.0", "xl-turbo") and pipeline.is_sd_xl_base():
+    elif version in ("xl-1.0", "xl-turbo", "pg") and pipeline.is_sd_xl_base():
         return 2048
-    elif version in ("xl-1.0", "xl-turbo") and pipeline.is_sd_xl_refiner():
+    elif version in ("xl-1.0", "xl-turbo", "pg") and pipeline.is_sd_xl_refiner():
         return 1280
     else:
         raise ValueError(f"Invalid version {version} + pipeline {pipeline}")

@@ -335,7 +335,7 @@ def get_refit_weights(state_dict, onnx_opt_path, weight_name_mapping, weight_sha
 
 def add_arguments(parser):
     # Stable Diffusion configuration
-    parser.add_argument('--version', type=str, default="1.5", choices=["1.4", "1.5", "dreamshaper-7", "2.0-base", "2.0", "2.1-base", "2.1", "xl-1.0", "xl-turbo"], help="Version of Stable Diffusion")
+    parser.add_argument('--version', type=str, default="1.5", choices=["1.4", "1.5", "dreamshaper-7", "2.0-base", "2.0", "2.1-base", "2.1", "xl-1.0", "xl-turbo", "pg"], help="Version of Stable Diffusion")
     parser.add_argument('prompt', nargs = '*', help="Text prompt(s) to guide image generation")
     parser.add_argument('--negative-prompt', nargs = '*', default=[''], help="The negative prompt(s) to guide the image generation.")
     parser.add_argument('--batch-size', type=int, default=1, choices=[1, 2, 4], help="Batch size (repeat prompt)")
